@@ -2,25 +2,25 @@ import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
 
 function App() {
-  const [clientes, setClientes] = useState([])
+  const [alumnos, setAlumnos] = useState([])
 
   useEffect(() => {
-    getClientes()
+    getAlumnos()
   }, [])
 
-  async function getClientes() {
+  async function getAlumnos() {
     const { data, error } =
       await supabase
-        .from('clientes')
+        .from('alumnos')
         .select('*')
 
-    if (!error) setClientes(data)
+    if (!error) setAlumnos(data)
   }
 
   return (
     <>
-      {clientes.map(c => (
-        <p key={c.id}>{c.nombre}</p>
+      {alumnos.map(a => (
+        <p key={a.id}>{a.nombre}</p>
       ))}
     </>
   )

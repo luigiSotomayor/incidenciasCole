@@ -1,29 +1,27 @@
-import { useEffect, useState } from 'react'
-import { supabase } from './supabase'
+import { useEffect, useState } from "react";
+import { supabase } from "./supabase";
 
 function App() {
-  const [alumnos, setAlumnos] = useState([])
+  const [alumnos, setAlumnos] = useState([]);
 
   useEffect(() => {
-    getAlumnos()
-  }, [])
+    getAlumnos();
+  }, []);
 
   async function getAlumnos() {
-    const { data, error } =
-      await supabase
-        .from('alumnos')
-        .select('*')
-
-    if (!error) setAlumnos(data)
+    const { data, error } = await supabase.from("alumnos").select("*");
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
+    if (!error) setAlumnos(data);
   }
 
   return (
     <>
-      {alumnos.map(a => (
-        <p key={a.id}>{a.nombre}</p>
+      {alumnos.map((a) => (
+        <p key={a.id}>{a.nombre} {a.apellidos}</p>
       ))}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
